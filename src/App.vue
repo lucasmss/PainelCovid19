@@ -14,7 +14,7 @@
     </b-navbar-nav>
   </b-navbar>
 
-   <div class="tabelaDados">
+   <div class="tabelaDados container">
     <b-table :striped="striped"
       :bordered="bordered"
       :borderless="borderless"
@@ -31,22 +31,32 @@
       :table-variant="tableVariant"></b-table>
   </div>
 
-  <div>
-    <h1 class="h1">Casos confirmados acumulados</h1>
+<b-container fluid="md">
+    <h1 class="h1">Casos confirmados e acumulados</h1>
+  <div class="row">
+    <line-chart class="col-sm-6" :data="chartData" :mes="labels"></line-chart>
+    <bar-chart class="col-sm-6" :data="chartData"></bar-chart>
   </div>
 
-  <div>
-    <h1 class="h1">Novos casos no dia</h1>
+<h1 class="h1">Novos casos no dia</h1>
+  <div class="row">
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
   </div>
 
-  <div>
-    <h1 class="h1">Óbitos acumulados</h1>
+<h1 class="h1">Óbitos acumulados</h1>
+  <div class="row">
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
   </div>
+  
+<h1 class="h1">Óbitos no dia</h1>
+  <div class="row">
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
+  </div>
+  </b-container>
 
-  <div>
-    <h1 class="h1">Óbitos no dia</h1>
-  </div>
-   
 </div>
 </template>
 
@@ -74,7 +84,16 @@ export default {
         footClone: false,
         headVariant: null,
         tableVariant: '',
-        noCollapse: true
+        noCollapse: true,
+
+        chartData: {
+          '2017-5-13': 2,
+          '2017-5-15': 5,
+          '2017-5-19': 9,
+          '2017-5-20': 15,
+          '2017-5-21': 20,
+          '2017-5-22': 22,
+        }
       }
     },
   }
