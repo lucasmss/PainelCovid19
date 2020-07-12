@@ -1,4 +1,4 @@
-# painelcivid
+# painelcovid
 
 ## Project setup
 ```
