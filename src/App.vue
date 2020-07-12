@@ -7,7 +7,7 @@
       <b-nav-item href="#">Painel Geral</b-nav-item>
 
       <b-nav-item-dropdown text="Sobre" >
-        <b-dropdown-item href="#">Nos</b-dropdown-item>
+        <b-dropdown-item href="#">Nós</b-dropdown-item>
         <b-dropdown-item href="#">Sistema</b-dropdown-item>
         <b-dropdown-item href="#">Contato</b-dropdown-item>
       </b-nav-item-dropdown>
@@ -34,6 +34,18 @@
   <div>
     <h1 class="h1">Casos confirmados acumulados</h1>
   </div>
+
+  <div>
+    <h1 class="h1">Novos casos no dia</h1>
+  </div>
+
+  <div>
+    <h1 class="h1">Óbitos acumulados</h1>
+  </div>
+
+  <div>
+    <h1 class="h1">Óbitos no dia</h1>
+  </div>
    
 </div>
 </template>
@@ -42,11 +54,11 @@
 export default {
     data() {
       return {
-        fields: ['first_name', 'last_name', 'age'],
+        fields: ['Estado', 'Casos', 'Óbitos', 'Atualização'],
         items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald', status: 'awesome' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { age: 89, first_name: 'Geneva', last_name: 'Wilson' }
+          { Estado: 'Brasilia', Casos: '144.804' , Óbitos: '2.897', Atualização: '11/07 19:00'},
+          { Estado: 'Sul', Casos: '121.543', Óbitos: '2.444', Atualização: '11/07 19:00' },
+          { Estado: 'Norte', Casos: '318.807', Óbitos: '10.453', Atualização: '11/07 19:00' }
         ],
          tableVariants: [
           'dark'
@@ -58,7 +70,7 @@ export default {
         small: false,
         hover: true,
         dark: true,
-        fixed: false,
+        fixed: true,
         footClone: false,
         headVariant: null,
         tableVariant: '',
@@ -76,7 +88,7 @@ export default {
   font-size: 30px;
 }
 .tabelaDados {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 </style>
