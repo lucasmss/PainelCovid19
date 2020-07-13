@@ -22,22 +22,25 @@
         <b-dropdown-item href="#">Sul</b-dropdown-item>
         <b-dropdown-item href="#">Norte</b-dropdown-item>
       </b-dropdown>
-    
-      <b-table :striped="striped"
-        :bordered="bordered"
-        :borderless="borderless"
-        :outlined="outlined"
-        :small="small"
-        :hover="hover"
-        :dark="dark"
-        :fixed="fixed"
-        :foot-clone="footClone"
-        :no-border-collapse="noCollapse"
-        :items="items"
-        :fields="fields"
-        :head-variant="headVariant"
-        :table-variant="tableVariant">
-      </b-table>
+
+  <table class="table table-dark" id="myTable"> 
+  <thead>
+    <tr>
+      <th scope="col">Estados</th>
+      <th scope="col">Casos</th>
+      <th scope="col">Óbitos</th>
+      <th scope="col">Atualizado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="produtos of produtos" :key="produtos.combinedKey">
+      <td>{{produtos.combinedKey}}</td>
+      <td>{{produtos.confirmed}}</td>
+      <td>{{produtos.deaths}}</td>
+      <td>{{null}}</td>
+    </tr> 
+  </tbody>
+</table>
 
     </div>
 
@@ -65,6 +68,7 @@
           <line-chart class="col-sm-6" :data="chartData"></line-chart>
           <line-chart class="col-sm-6" :data="chartData"></line-chart>
         </div>
+
   </b-container>
 
   <footer class="footer">
@@ -75,31 +79,13 @@
 </template>
 
 <script>
+
+import Produtos from './services/produtos'
+
 export default {
     data() {
       return {
-        fields: ['Estado', 'Casos', 'Óbitos', 'Atualização'],
-        items: [
-          { Estado: 'Centro-Oeste', Casos: '144.804' , Óbitos: '2.897', Atualização: '11/07 19:00'},
-          { Estado: 'Sul', Casos: '121.543', Óbitos: '2.444', Atualização: '11/07 19:00' },
-          { Estado: 'Norte', Casos: '318.807', Óbitos: '10.453', Atualização: '11/07 19:00' }
-        ],
-         tableVariants: [
-          'dark'
-        ],
-        striped: true,
-        bordered: true,
-        borderless: false,
-        outlined: false,
-        small: false,
-        hover: true,
-        dark: true,
-        fixed: true,
-        footClone: false,
-        headVariant: null,
-        tableVariant: '',
-        noCollapse: true,
-
+        produtos:[],
         chartData: {
           '2017-5-13': 2,
           '2017-5-15': 5,
@@ -107,9 +93,15 @@ export default {
           '2017-5-20': 15,
           '2017-5-21': 20,
           '2017-5-22': 22,
-        }
+        },
       }
     },
+    mounted(){
+      Produtos.listar().then(resposta => {
+        console.log(resposta.data)
+        this.produtos = resposta.data
+      })
+    }
   }
 </script>
 
