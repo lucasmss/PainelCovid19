@@ -2,11 +2,11 @@
 <div>
   <b-navbar type="dark" variant="dark">
     <b-navbar-nav>
-      <b-nav-item href="#">PAINEL COVID - 19</b-nav-item>
+      <b-nav-item href="#" class="textP">PAINEL COVID - 19</b-nav-item>
 
-      <b-nav-item href="#">Painel Geral</b-nav-item>
+      <b-nav-item href="#" class="textPsimples">Painel Geral</b-nav-item>
 
-      <b-nav-item-dropdown text="Sobre" >
+      <b-nav-item-dropdown text="Sobre" class="textPsimples" >
         <b-dropdown-item href="#">Nós</b-dropdown-item>
         <b-dropdown-item href="#">Sistema</b-dropdown-item>
         <b-dropdown-item href="#">Contato</b-dropdown-item>
@@ -14,7 +14,7 @@
     </b-navbar-nav>
   </b-navbar>
 
-   <div class="tabelaDados container">
+   <div class="dadosMarg  container">
     <b-table :striped="striped"
       :bordered="bordered"
       :borderless="borderless"
@@ -32,30 +32,34 @@
   </div>
 
 <b-container fluid="md">
-    <h1 class="h1">Casos confirmados e acumulados</h1>
+    <h1 class="h1 dadosMargTabela ">Casos confirmados e acumulados</h1>
   <div class="row">
-    <line-chart class="col-sm-6" :data="chartData" :mes="labels"></line-chart>
+    <line-chart class="col-sm-6" :data="chartData"></line-chart>
     <bar-chart class="col-sm-6" :data="chartData"></bar-chart>
   </div>
 
-<h1 class="h1">Novos casos no dia</h1>
+<h1 class="h1 dadosMargTabela ">Novos casos no dia</h1>
   <div class="row">
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
   </div>
 
-<h1 class="h1">Óbitos acumulados</h1>
+<h1 class="h1 dadosMargTabela ">Óbitos acumulados</h1>
   <div class="row">
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
   </div>
-  
-<h1 class="h1">Óbitos no dia</h1>
+
+<h1 class="h1 dadosMargTabela ">Óbitos no dia</h1>
   <div class="row">
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
     <line-chart class="col-sm-6" :data="chartData"></line-chart>
   </div>
   </b-container>
+
+<footer class="footer">
+  <p class="textFotter">Desenvolvido por Lucas Mateus Silva</p>
+</footer>
 
 </div>
 </template>
@@ -106,8 +110,31 @@ export default {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 30px;
 }
-.tabelaDados {
+.dadosMarg {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.dadosMargTabela {
+  margin-top: 11px;
+  margin-bottom: 11px;
+}
+.footer {
+  background-color: black;
+  margin-top: 2%;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 0.5%;
+}
+.textP {
+  font-size: 24px;
+  color: white;
+}
+.textPsimples {
+  font-size: 23px;
+  color: white;
+}
+.textFotter {
+  font-size: 24px;
+  color: white;
 }
 </style>
