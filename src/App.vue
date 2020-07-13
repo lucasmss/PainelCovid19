@@ -23,26 +23,26 @@
         <b-dropdown-item href="#">Norte</b-dropdown-item>
       </b-dropdown>
 
-  <table class="table table-dark" id="myTable"> 
-  <thead>
-    <tr>
-      <th scope="col">Estados</th>
-      <th scope="col">Casos</th>
-      <th scope="col">Óbitos</th>
-      <th scope="col">Atualizado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="produtos of produtos" :key="produtos.combinedKey">
-      <td>{{produtos.combinedKey}}</td>
-      <td>{{produtos.confirmed}}</td>
-      <td>{{produtos.deaths}}</td>
-      <td>{{null}}</td>
-    </tr> 
-  </tbody>
-</table>
+      <table class="table table-dark" id="myTable"> 
+      <thead>
+        <tr>
+          <th scope="col">Estados</th>
+          <th scope="col">Casos</th>
+          <th scope="col">Óbitos</th>
+          <th scope="col">Atualizado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="produtos of produtos" :key="produtos.combinedKey">
+          <td>{{produtos.combinedKey}}</td>
+          <td>{{produtos.confirmed}}</td>
+          <td>{{produtos.deaths}}</td>
+          <td>12/07</td>
+        </tr> 
+      </tbody>
+    </table>
 
-    </div>
+  </div>
 
   <b-container fluid="md">
       <h1 class="h1 dadosMargTabela ">Casos confirmados e acumulados</h1>
@@ -65,8 +65,8 @@
 
       <h1 class="h1 dadosMargTabela ">Óbitos no dia</h1>
         <div class="row">
-          <line-chart class="col-sm-6" :data="chartData"></line-chart>
-          <line-chart class="col-sm-6" :data="chartData"></line-chart>
+          <line-chart class="col-sm-6" :data="chartData" :title="title" ></line-chart>
+          <bar-chart class="col-sm-6" :data="chartDataObito" :title="title" :label="labels" ></bar-chart>
         </div>
 
   </b-container>
@@ -82,19 +82,30 @@
 
 import Produtos from './services/produtos'
 
+
 export default {
     data() {
       return {
         produtos:[],
         chartData: {
-          '2017-5-13': 2,
-          '2017-5-15': 5,
-          '2017-5-19': 9,
-          '2017-5-20': 15,
-          '2017-5-21': 20,
-          '2017-5-22': 22,
-        },
+          '2020-07-7': 10100,
+          '2020-07-14': 30100,
+          '2020-07-20': 50100,
+          '2020-07-24': 60100,
+          '2020-07-26': 70010,
+          '2020-07-30': 72100,
+          },
+          title: 'Óbitos de COVID-19 Mensal',
+           chartDataObito: {
+             '3': 10100,
+             '4': 30100,
+             '5': 50100,
+             '6': 60100,
+             '7': 72100,
+           },
+           labels: 'Março'
       }
+     
     },
     mounted(){
       Produtos.listar().then(resposta => {
