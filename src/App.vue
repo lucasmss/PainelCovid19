@@ -26,10 +26,10 @@
       <table class="table table-dark" id="myTable"> 
       <thead>
         <tr>
-          <th scope="col">Estados</th>
+          <th scope="col">UF</th>
           <th scope="col">Casos</th>
           <th scope="col">Óbitos</th>
-          <th scope="col">Atualizado</th>
+          <th scope="col">Atualizado em</th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +37,7 @@
           <td>{{produtos.combinedKey}}</td>
           <td>{{produtos.confirmed}}</td>
           <td>{{produtos.deaths}}</td>
-          <td>12/07</td>
+          <td>{{ moment(produtos.lastUpdate).format('DD/MM/YYYY HH:mm')}}</td>
         </tr> 
       </tbody>
     </table>
@@ -48,7 +48,7 @@
       <h1 class="h1 dadosMargTabela ">Casos confirmados e acumulados</h1>
         <div class="row">
           <line-chart class="col-sm-6" :data="chartData"></line-chart>
-          <bar-chart class="col-sm-6" :data="chartData"></bar-chart>
+          <bar-chart class="col-sm-6"  :data="chartData"></bar-chart>
         </div>
 
       <h1 class="h1 dadosMargTabela ">Novos casos no dia</h1>
@@ -66,7 +66,7 @@
       <h1 class="h1 dadosMargTabela ">Óbitos no dia</h1>
         <div class="row">
           <line-chart class="col-sm-6" :data="chartData" :title="title" ></line-chart>
-          <bar-chart class="col-sm-6" :data="chartDataObito" :title="title" :label="labels" ></bar-chart>
+          <bar-chart class="col-sm-6"  :data="chartDataObito" :title="title"></bar-chart>
         </div>
 
   </b-container>
@@ -82,18 +82,18 @@
 
 import Produtos from './services/produtos'
 
-
 export default {
     data() {
       return {
         produtos:[],
+
         chartData: {
           '2020-07-7': 10100,
           '2020-07-14': 30100,
           '2020-07-20': 50100,
           '2020-07-24': 60100,
           '2020-07-26': 70010,
-          '2020-07-30': 72100,
+          '2020-07-30': 72800,
           },
           title: 'Óbitos de COVID-19 Mensal',
            chartDataObito: {
@@ -103,16 +103,16 @@ export default {
              '6': 60100,
              '7': 72100,
            },
-           labels: 'Março'
+           
       }
-     
-    },
-    mounted(){
-      Produtos.listar().then(resposta => {
-        console.log(resposta.data)
-        this.produtos = resposta.data
-      })
-    }
+      },
+      mounted(){
+        Produtos.listar().then(resposta => {
+          console.log(resposta.data)
+          this.produtos = resposta.data
+        })
+      }
+      
   }
 </script>
 
