@@ -17,11 +17,7 @@
 
    <div class="dadosMarg  container">
 
-      <b-dropdown split text="Selecionar Região" class="m-6">
-        <b-dropdown-item href="#">Centro-Oeste</b-dropdown-item>
-        <b-dropdown-item href="#">Sul</b-dropdown-item>
-        <b-dropdown-item href="#">Norte</b-dropdown-item>
-      </b-dropdown>
+     
 
       <table class="table table-dark" id="myTable"> 
       <thead>
@@ -33,15 +29,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="produtos of produtos" :key="produtos.combinedKey">
+        <tr>
+          <td> 
+            <b-input-group class="mt-3 inptEstado" type="search" prepend="Buscar"  
+              v-on:input="filtro = $event.target.value" placeholder="Buscar Estado">
+              <b-form-input></b-form-input>
+            </b-input-group>
+          </td>
+        </tr>
+        <tr v-for="produtos of estadoFiltro" :key="produtos.combinedKey">
           <td>{{produtos.combinedKey}}</td>
           <td>{{produtos.confirmed}}</td>
           <td>{{produtos.deaths}}</td>
-          <td>{{ moment(produtos.lastUpdate).format('DD/MM/YYYY HH:mm')}}</td>
+          <td>{{moment(produtos.lastUpdate).format('DD/MM/YYYY HH:mm')}}</td>
         </tr> 
       </tbody>
     </table>
-
+  <b-pagination
+     
+    ></b-pagination>
   </div>
 
   <b-container fluid="md">
@@ -86,7 +92,9 @@ export default {
     data() {
       return {
         produtos:[],
-
+        filtro: '',
+        pageActual: 1,
+        limitItems: 10,
         chartData: {
           '2020-07-7': 10100,
           '2020-07-14': 30100,
@@ -102,8 +110,7 @@ export default {
              '5': 50100,
              '6': 60100,
              '7': 72100,
-           },
-           
+           },   
       }
       },
       mounted(){
@@ -111,9 +118,22 @@ export default {
           console.log(resposta.data)
           this.produtos = resposta.data
         })
-      }
-      
-  }
+      },
+      computed: {
+
+        estadoFiltro(){
+        if (this.filtro) {
+         let exp = new RegExp(this.filtro.trim(), 'i');
+         return this.produtos.filter(produtos => exp.test(produtos.combinedKey));
+        }
+        else{
+          return this.produtos;
+        }
+        }
+
+
+      },
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
